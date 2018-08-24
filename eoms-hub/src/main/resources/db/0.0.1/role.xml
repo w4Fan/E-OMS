@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-role" author="fans">
+        <createTable tableName="eoms_role">
+            <column name="id" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="organization_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_admin" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="function_ids" type="varchar(255)"/>
+            <column name="rank_id" type="smallint"/>
+            <column name="description" type="varchar(255)"/>
+            <column name="gmt_create" type="timestamp"/>
+            <column name="gmt_modified" type="timestamp"/>
+        </createTable>
+
+        <addPrimaryKey tableName="eoms_role" columnNames="id" constraintName="pk_eoms_role"/>
+        <addForeignKeyConstraint
+                baseTableName="eoms_role"
+                baseColumnNames="organization_id"
+                constraintName="fk_eoms_role"
+                referencedTableName="eoms_organization"
+                referencedColumnNames="id"/>
+
+        <insert tableName="eoms_role">
+            <column name="id" value="1"/>
+            <column name="organization_id" value="1"/>
+            <column name="name" value="EOMS System Manager"/>
+            <column name="is_admin" value="true"/>
+            <column name="function_ids" value="1"/>
+            <column name="rank_id" value="1"/>
+            <column name="description" value="EOMS System Manager"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

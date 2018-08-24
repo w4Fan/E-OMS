@@ -1,0 +1,29 @@
+logging:
+  level: INFO
+  loggers:
+    com.fans: DEBUG
+  appenders:
+    - type: console
+      logFormat: "%-5p [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%t] %c: %m%n%rEx"
+    - type: file
+      currentLogFilename: logs/eoms-hub.log
+      archivedLogFilenamePattern: logs/aiot-idp-%d.log.gz
+      archivedFileCount: 2
+      logFormat: "%-5p [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%t] %c: %m%n%rEx"
+
+server:
+  adminConnectors:
+    - type: http
+      port: 9000
+  applicationConnectors:
+    - type: http
+      port: 8000
+  rootPath: /api/hub/v1/
+
+database:
+  driverClass: org.postgresql.Driver
+  user: eoms
+  password: eoms
+  url: jdbc:postgresql://localhost:5432/eoms
+  minSize: 5
+  maxSize: 10

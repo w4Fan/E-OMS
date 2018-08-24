@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-rank-dictionary" author="fans">
+        <createTable tableName="eoms_rank">
+            <column name="id" type="smallint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_admin" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gmt_create" type="timestamp"/>
+            <column name="gmt_modified" type="timestamp"/>
+        </createTable>
+
+        <addPrimaryKey tableName="eoms_rank" columnNames="id" constraintName="pk_eoms_rank"/>
+        <addUniqueConstraint tableName="eoms_rank" columnNames="name" constraintName="uk_eoms_rank"/>
+
+        <insert tableName="eoms_rank">
+            <column name="id" value="1"/>
+            <column name="name" value="SYSTEM"/>
+            <column name="is_admin" value="true"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_rank">
+            <column name="id" value="2"/>
+            <column name="name" value="DIRECTOR"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_rank">
+            <column name="id" value="3"/>
+            <column name="name" value="MANAGER"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_rank">
+            <column name="id" value="4"/>
+            <column name="name" value="STAFF"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

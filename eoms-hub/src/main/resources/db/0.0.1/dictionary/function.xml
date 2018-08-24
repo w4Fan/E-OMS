@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-function-dictionary" author="fans">
+        <createTable tableName="eoms_function">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="menu_root_ids" type="varchar(255)"/>
+            <column name="is_admin" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gmt_create" type="timestamp"/>
+            <column name="gmt_modified" type="timestamp"/>
+        </createTable>
+
+        <addPrimaryKey tableName="eoms_function" columnNames="id" constraintName="pk_eoms_function"/>
+        <addUniqueConstraint tableName="eoms_function" columnNames="name" constraintName="uk_eoms_function"/>
+
+        <insert tableName="eoms_function">
+            <column name="name" value="SYSTEM"/>
+            <column name="menu_root_ids" value="1"/>
+            <column name="is_admin" value="true"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_function">
+            <column name="name" value="MARKET"/>
+            <column name="menu_root_ids" value="2"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_function">
+            <column name="name" value="SALES"/>
+            <column name="menu_root_ids" value="3"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_function">
+            <column name="name" value="ACADEMIC AFFAIRS"/>
+            <column name="menu_root_ids" value="4"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

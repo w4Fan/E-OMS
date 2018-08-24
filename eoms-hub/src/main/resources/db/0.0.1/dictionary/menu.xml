@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-menu-dictionary" author="fans">
+        <createTable tableName="eoms_menu">
+            <column name="id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_root" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="root_id" type="varchar(255)"/>
+            <column name="parent_id" type="varchar(255)"/>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_page" type="boolean" defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="operating_ids" type="varchar(255)"/>
+            <column name="gmt_create" type="timestamp"/>
+            <column name="gmt_modified" type="timestamp"/>
+        </createTable>
+
+        <addPrimaryKey tableName="eoms_menu" columnNames="id" constraintName="pk_eoms_menu"/>
+        <addUniqueConstraint tableName="eoms_menu" columnNames="name" constraintName="uk_eoms_menu"/>
+
+        <insert tableName="eoms_menu">
+            <column name="id" value="1"/>
+            <column name="is_root" value="true"/>
+            <column name="name" value="SYSTEM"/>
+            <column name="is_page" value="false"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_menu">
+            <column name="id" value="1-1"/>
+            <column name="root_id" value="1"/>
+            <column name="parent_id" value="1"/>
+            <column name="name" value="Organization"/>
+            <column name="operating_ids" value="1,2,3"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_menu">
+            <column name="id" value="1-2"/>
+            <column name="root_id" value="1"/>
+            <column name="parent_id" value="1"/>
+            <column name="name" value="Role"/>
+            <column name="operating_ids" value="1,2,3"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_menu">
+            <column name="id" value="1-3"/>
+            <column name="root_id" value="1"/>
+            <column name="parent_id" value="1"/>
+            <column name="name" value="Authority"/>
+            <column name="operating_ids" value="4"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_menu">
+            <column name="id" value="1-4"/>
+            <column name="root_id" value="1"/>
+            <column name="parent_id" value="1"/>
+            <column name="name" value="User"/>
+            <column name="operating_ids" value="1,2,3,5"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_menu">
+            <column name="id" value="2"/>
+            <column name="is_root" value="true"/>
+            <column name="name" value="MARKET"/>
+            <column name="is_page" value="false"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_menu">
+            <column name="id" value="2-1"/>
+            <column name="root_id" value="2"/>
+            <column name="parent_id" value="2"/>
+            <column name="name" value="Activity"/>
+            <column name="operating_ids" value="1,2,3"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_menu">
+            <column name="id" value="3"/>
+            <column name="is_root" value="true"/>
+            <column name="name" value="SALES"/>
+            <column name="is_page" value="false"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_menu">
+            <column name="id" value="3-1"/>
+            <column name="root_id" value="3"/>
+            <column name="parent_id" value="3"/>
+            <column name="name" value="Student"/>
+            <column name="operating_ids" value="1,2,3"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_menu">
+            <column name="id" value="3-2"/>
+            <column name="root_id" value="3"/>
+            <column name="parent_id" value="3"/>
+            <column name="name" value="Opportunity"/>
+            <column name="operating_ids" value="1,2,3"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_menu">
+            <column name="id" value="3-3"/>
+            <column name="root_id" value="3"/>
+            <column name="parent_id" value="3"/>
+            <column name="name" value="Contract"/>
+            <column name="operating_ids" value="1,2,3"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_menu">
+            <column name="id" value="4"/>
+            <column name="is_root" value="true"/>
+            <column name="name" value="ACADEMIC AFFAIRS"/>
+            <column name="is_page" value="false"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_menu">
+            <column name="id" value="4-1"/>
+            <column name="root_id" value="4"/>
+            <column name="parent_id" value="4"/>
+            <column name="name" value="Course"/>
+            <column name="operating_ids" value="1,2,3"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-operating-dictionary" author="fans">
+        <createTable tableName="eoms_operating">
+            <column name="id" type="smallint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gmt_create" type="timestamp"/>
+            <column name="gmt_modified" type="timestamp"/>
+        </createTable>
+
+        <addPrimaryKey tableName="eoms_operating" columnNames="id" constraintName="pk_eoms_operating"/>
+        <addUniqueConstraint tableName="eoms_operating" columnNames="name" constraintName="uk_eoms_operating"/>
+
+        <insert tableName="eoms_operating">
+            <column name="id" value="1"/>
+            <column name="name" value="CREATE"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_operating">
+            <column name="id" value="2"/>
+            <column name="name" value="UPDATE"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_operating">
+            <column name="id" value="3"/>
+            <column name="name" value="DELETE"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_operating">
+            <column name="id" value="4"/>
+            <column name="name" value="AUTHORIZE"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_operating">
+            <column name="id" value="5"/>
+            <column name="name" value="ENABLE/DISABLE"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

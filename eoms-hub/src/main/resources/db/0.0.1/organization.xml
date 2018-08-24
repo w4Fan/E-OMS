@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-organization" author="fans">
+        <createTable tableName="eoms_organization">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_root" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="root_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="parent_id" type="int"/>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="province" type="varchar(20)"/>
+            <column name="city" type="varchar(20)"/>
+            <column name="district" type="varchar(20)"/>
+            <column name="address" type="varchar(255)"/>
+            <column name="owner" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gmt_create" type="timestamp"/>
+            <column name="gmt_modified" type="timestamp"/>
+        </createTable>
+
+        <addPrimaryKey tableName="eoms_organization" columnNames="id" constraintName="pk_eoms_organization"/>
+        <addUniqueConstraint tableName="eoms_organization" columnNames="name" constraintName="uk_eoms_organization"/>
+
+        <insert tableName="eoms_organization">
+            <column name="is_root" value="true"/>
+            <column name="root_id" value="1"/>
+            <column name="name" value="E-OMS"/>
+            <column name="owner" value="EOMS"/>
+            <column name="phone" value="13900000000"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

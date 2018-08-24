@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-user" author="fans">
+        <createTable tableName="eoms_user">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="organization_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_enable" type="boolean" defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gmt_create" type="timestamp"/>
+            <column name="gmt_modified" type="timestamp"/>
+        </createTable>
+
+        <addPrimaryKey tableName="eoms_user" columnNames="id" constraintName="pk_eoms_user"/>
+        <addForeignKeyConstraint
+                baseTableName="eoms_user"
+                baseColumnNames="organization_id"
+                constraintName="fk_eoms_user_organization"
+                referencedTableName="eoms_organization"
+                referencedColumnNames="id"/>
+        <addForeignKeyConstraint
+                baseTableName="eoms_user"
+                baseColumnNames="role_id"
+                constraintName="fk_eoms_user_role"
+                referencedTableName="eoms_role"
+                referencedColumnNames="id"/>
+
+        <insert tableName="eoms_user">
+            <column name="organization_id" value="1"/>
+            <column name="role_id" value="1"/>
+            <column name="email" value="fans@eoms.com"/>
+            <column name="password" value="123456"/>
+            <column name="name" value="EOMS System Operator"/>
+            <column name="phone" value="13900000000"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

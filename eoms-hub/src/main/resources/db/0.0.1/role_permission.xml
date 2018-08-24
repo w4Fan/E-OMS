@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-role-permission" author="fans">
+        <createTable tableName="eoms_role_permission">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="menu_id" type="varchar(255)"/>
+            <column name="operating_ids" type="varchar(255)"/>
+            <column name="gmt_create" type="timestamp"/>
+            <column name="gmt_modified" type="timestamp"/>
+        </createTable>
+
+        <addPrimaryKey tableName="eoms_role_permission" columnNames="id" constraintName="pk_eoms_role_permission"/>
+        <addForeignKeyConstraint
+                baseTableName="eoms_role_permission"
+                baseColumnNames="role_id"
+                constraintName="fk_eoms_role_permission"
+                referencedTableName="eoms_role"
+                referencedColumnNames="id"/>
+
+        <insert tableName="eoms_role_permission">
+            <column name="role_id" value="1"/>
+            <column name="menu_id" value="1"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_role_permission">
+            <column name="role_id" value="1"/>
+            <column name="menu_id" value="1-1"/>
+            <column name="operating_ids" value="1,2,3"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_role_permission">
+            <column name="role_id" value="1"/>
+            <column name="menu_id" value="1-2"/>
+            <column name="operating_ids" value="1,2,3"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_role_permission">
+            <column name="role_id" value="1"/>
+            <column name="menu_id" value="1-3"/>
+            <column name="operating_ids" value="4"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+        <insert tableName="eoms_role_permission">
+            <column name="role_id" value="1"/>
+            <column name="menu_id" value="1-4"/>
+            <column name="operating_ids" value="1,2,3,5"/>
+            <column name="gmt_create" valueComputed="LOCALTIMESTAMP"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
